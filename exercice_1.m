@@ -8,12 +8,12 @@ load donnees;
 figure('Name','Individu moyen et eigenfaces','Position',[0,0,0.67*L,0.67*H]);
 
 % Calcul de l'individu moyen :
-individu_moyen = mean(X);
+individu_moyen = mean(X,1);
 
 % Centrage des donnees :
 X_c = X-individu_moyen;
 % Calcul de la matrice Sigma_2 (de taille n x n) [voir Annexe 1 pour la nature de Sigma_2] :
-Sigma_2 = X_c*X_c'/n;
+Sigma_2 = X_c*X_c';
 
 % Calcul des vecteurs/valeurs propres de la matrice Sigma_2 :
 
@@ -33,8 +33,8 @@ W = X_c'*U;
 % [les vecteurs propres de Sigma_2 sont normalis??s
 % mais le calcul qui donne W, les vecteurs propres de Sigma,
 % leur fait perdre cette propri??t??] :
-W=W./sqrt(sum(W.^2,2));
-W=W';
+W=W./normest(W);
+
 % Affichage de l'individu moyen et des eigenfaces sous forme d'images :
  colormap gray;
  img = reshape(individu_moyen,nb_lignes,nb_colonnes);
@@ -44,7 +44,7 @@ W=W';
  axis off;
  title('Individu moyen','FontSize',15);
  for k = 1:n-1
-	img = reshape(W(k,:),nb_lignes,nb_colonnes);
+	img = reshape(W(:,k),nb_lignes,nb_colonnes);
 	subplot(nb_individus,nb_postures,k+1);
 	imagesc(img);
 	axis image;

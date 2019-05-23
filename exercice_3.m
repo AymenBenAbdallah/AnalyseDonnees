@@ -32,18 +32,20 @@ axis off;
 N = 8;
 
 % N premieres composantes principales des images d'apprentissage :
+C = X_c*W;
 donnees_apprentissage = C(:,1:N);
 
 % N premieres composantes principales de l'image de test :
-donnees_test = image_test * W';
+image_test_centre = image_test-individu_moyen;
+donnees_test = image_test_centre * W;
 donnees_test = donnees_test(:,1:N);
 
 % Determination de l'image d'apprentissage la plus proche (plus proche voisin) :
-kkpv(donnes_apprentissage,donnees_test
+[ nearest_neighbors_projection,distances ] = kppv(donnees_apprentissage, donnees_test,3 )
 
 % Affichage du resultat :
-if ...
-	individu_reconnu =...
+if ( distances(1)<s )
+	individu_reconnu = nearest_neighbors_projection(1,:)*W(:,1:N)'+individu_moyen;
 	title({['Posture numero ' num2str(posture) ' de l''individu numero ' num2str(individu)];...
 		['Je reconnais l''individu numero ' num2str(individu_reconnu)]},'FontSize',20);
 else
