@@ -41,11 +41,15 @@ donnees_test = image_test_centre * W;
 donnees_test = donnees_test(:,1:N);
 
 % Determination de l'image d'apprentissage la plus proche (plus proche voisin) :
-[ nearest_neighbors_projection,distances ] = kppv(donnees_apprentissage, donnees_test,3 )
+K = 1;
+listeClass = 1:37; %37 individus
+listeLabel = 1:37; %individus identifiés par leur numéros
+labelA = [2 2 2 2 4 4 4 4 6 6 6 6 37 37 37 37 ];
+[individu_reconnu,distances] = kppv(donnees_apprentissage, donnees_test, N ,K, listeClass, listeLabel, labelA)
 
 % Affichage du resultat :
 if ( distances(1)<s )
-	individu_reconnu = nearest_neighbors_projection(1,:)*W(:,1:N)'+individu_moyen;
+	%individu_reconnu = nearest_neighbors_projection(1,:)*W(:,1:N)'+individu_moyen;
 	title({['Posture numero ' num2str(posture) ' de l''individu numero ' num2str(individu)];...
 		['Je reconnais l''individu numero ' num2str(individu_reconnu)]},'FontSize',20);
 else
