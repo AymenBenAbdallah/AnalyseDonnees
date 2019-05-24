@@ -25,9 +25,9 @@ for i = 1:Nt
     %sqrt non obligatoire
     
     % On ne garde que les indices des K + proches voisins
-    [tri, I] = sort(distances);
+    [distances, I] = sort(distances);
     I = I(1:K);
-    tri(I);
+    distances(I);
     % Comptage du nombre de voisins appartenant à chaque classe
     
     listeLabel = labelA(I);
