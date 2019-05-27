@@ -15,10 +15,11 @@ X_c=X-ones(size(X,1),1)*individu_moyen;
 
 % Calcul de la matrice Sigma_2 (de taille n x n) [voir Annexe 1 pour la nature de Sigma_2] :
 Sigma_2=(1/n)*(X_c*X_c');
-
-% Calcul des vecteurs/valeurs propres de la matrice Sigma_2 :
+taille = size(Sigma_2);
+% Calcul des vecteurs/valeurs propres de la matrice Sigma_2  via eig (préférez utiliser subspace):
 
 [Vecteurs,D]=eig(Sigma_2);
+
 
 % Tri par ordre decroissant des valeurs propres de Sigma_2 :
 [valTrie,index]=sort(diag(D),'descend');
@@ -32,7 +33,12 @@ Trie_Premier=W_trie(:,1:end-1);
 
 % Vecteurs propres de Sigma (deduits de ceux de Sigma_2) :
 W = X_c'*Trie_Premier;
-    
+
+
+% appel à la routine fortran subspace_iter1
+%[W v res it] = fortran_subspace_iter_ev(Sigma_2, taille(1), 10, 0.2, 1e-16, 20000);
+
+
 % Normalisation des vecteurs propres de Sigma
 % [les vecteurs propres de Sigma_2 sont normalis??s
 % mais le calcul qui donne W, les vecteurs propres de Sigma,

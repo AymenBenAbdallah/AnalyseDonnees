@@ -13,10 +13,8 @@ s = 1.0e+04*0.0050; %tester avec un individu compris dans la liste d'apprentissa
 per = 0.95;
 
 % Tirage aleatoire d'une image de test :
-%individu = randi(37);
-%posture = randi(6);
-individu = 7;
-posture = 6;
+individu = randi(37);
+posture = randi(6);
 chemin = './Images_Projet_2019';
 fichier = [chemin '/' num2str(individu+3) '-' num2str(posture) '.jpg']
 Im=importdata(fichier);
