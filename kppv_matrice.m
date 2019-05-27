@@ -1,4 +1,4 @@
-function matrice_confusion = kppv_matrice(DataA,DataT,N,K,ListeClass,listeLabel,labelA)
+function matrice_confusion = kppv_matrice(N,K,ListeClass,listeLabel,labelA)
     matrice_confusion = zeros(37,37);
     s = 1.0e+04*0.0050;
     for i = 1:37
