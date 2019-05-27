@@ -8,12 +8,12 @@ figure('Name','RMSE en fonction du nombre de composantes principales','Position'
 RMSE_max = 0;
 
 % Composantes principales des donnees d'apprentissage
-C = X_c*W';
+C =X_c*W;
 
-for q = 1:n-1
+for q = 0:n-1
     comp = C(:,1:q);		% q premieres composantes principales
-    eig = W(1:q,:);		% q premieres eigenfaces
-    X_reconstruit = comp * eig;
+    eig = W(:,1:q);		% q premieres eigenfaces
+    X_reconstruit = comp * eig' + ones(size(X_c,1),1)*individu_moyen;
     figure(1);
     set(h,'Name',['Utilisation des ' num2str(q) ' premieres composantes principales']);
     colormap gray;
@@ -29,8 +29,8 @@ for q = 1:n-1
     
     figure(2);
     hold on;
-    RMSE = sqrt(sum((X_reconstruit(:)-X(:))).^2)/307200;
-    RMSE_max = max(RMSE,RMSE_max);
+    RMSE = sqrt(mean((X_reconstruit(:)-X(:)).^2));
+    RMSE_max = max(RMSE, RMSE_max);
     plot(q,RMSE,'r+','MarkerSize',8,'LineWidth',2);
     axis([0 n-1 0 1.1*RMSE_max]);
     set(gca,'FontSize',20);
