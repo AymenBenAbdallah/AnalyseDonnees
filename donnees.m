@@ -3,7 +3,7 @@ close all
 
 % Choix des images parmi les 37 individus et 6 postures faciales :
 %numeros_individus = [2 4 6 37];
-numeros_individus = [1:2:37];
+numeros_individus = [1:37];
 numeros_postures = [1 2 3 4];
 
 % Chargement et conversion des images

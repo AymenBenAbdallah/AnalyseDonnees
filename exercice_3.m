@@ -48,7 +48,7 @@ listeClass = 1:37; %37 individus
 listeLabel = 1:37; %individus identifiés par leur numéros
 labelA = repelem(numeros_individus,length(numeros_postures)) %On réplique le nombre des postures d'un individu dans la même classe
 [individu_reconnu,distances] = kppv(donnees_apprentissage, donnees_test, N ,K, listeClass, listeLabel, labelA)
-
+matrice_confusion = kppv_matrice(N,K,listeClass,listeLabel,labelA,X_c,W,individu_moyen)
 % Affichage du resultat :
 if ( distances(1)<s )
 	%individu_reconnu = nearest_neighbors_projection(1,:)*W(:,1:N)'+individu_moyen;
